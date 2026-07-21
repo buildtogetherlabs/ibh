@@ -8,25 +8,18 @@ Static site for the IBH Union Hall.
 | --- | --- |
 | **https://local4663.com** | Landing — jacket + **JOIN LOCAL 4663** |
 | **https://local4663.com/pledge** | Airdrop / tribute — membership card + **PLEDGE TRIBUTE** |
-| https://pledge.local4663.com | Same pledge site (needs Cloudflare CNAME — see below) |
-| https://gibtogether.github.io/ibh/ | GitHub Pages fallback for landing |
+| https://gibtogether.github.io/ibh/ | GitHub Pages fallback |
 
-### Optional: `pledge.local4663.com` DNS (Cloudflare)
-
-In Cloudflare → **local4663.com** → **DNS** → **Add record**:
-
-| Type | Name | Target | Proxy status |
-| --- | --- | --- | --- |
-| CNAME | `pledge` | `gibtogether.github.io` | DNS only (grey cloud) |
-
-Until that record exists, use **https://local4663.com/pledge** (already live via this repo).
+Pledge lives in this repo only (`pledge/`). There is no separate pledge site or subdomain.
 
 ## Pages (this repo)
 
 | File | Role |
 | --- | --- |
-| `index.html` | Landing — jacket; join links to `https://local4663.com/pledge` |
+| `index.html` | Landing — jacket; join links to `/pledge` |
 | `home.html` | Union Hall home — poster hero + logo |
+| `join.html` | Redirects to `/pledge` |
+| `pledge/index.html` | Tribute / airdrop enrollment |
 
 ## Assets
 
@@ -36,6 +29,9 @@ Until that record exists, use **https://local4663.com/pledge** (already live via
 | `IBHposter.png` | Home page hero |
 | `IBHlogo.png` | Site logo + favicon |
 | `IBHjacketrear.png` | Jacket rear (reserved) |
+| `IBHmembercard.png` | Membership card (pledge page) |
+| `pledge/IBHlogo.png` | Pledge page logo |
+| `pledge/IBHmembercard.png` | Pledge page card |
 
 ## Workflow
 
@@ -45,10 +41,8 @@ Until that record exists, use **https://local4663.com/pledge** (already live via
 
 ## Local preview
 
-Open `index.html` in a browser, or from the repo root:
-
 ```bash
 python3 -m http.server 8080
 ```
 
-Then visit http://localhost:8080
+Then visit http://localhost:8080 and http://localhost:8080/pledge
