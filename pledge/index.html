@@ -57,8 +57,9 @@
             height: auto;
             display: block;
             user-select: none;
-            /* PNG has transparent canvas so page white reads continuous */
+            /* Transparent canvas blends with page white; shadow follows card alpha */
             background: transparent;
+            filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.16));
         }
 
         /* Same CTA language as local4663.com landing */
