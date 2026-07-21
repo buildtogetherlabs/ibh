@@ -4,7 +4,9 @@ Static site for the IBH Union Hall.
 
 ## Live site
 
-**https://gibtogether.github.io/ibh/**
+**https://local4663.com**
+
+GitHub Pages fallback: https://gibtogether.github.io/ibh/
 
 ## Pages
 
