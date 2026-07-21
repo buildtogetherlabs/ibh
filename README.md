@@ -7,7 +7,7 @@ Static site for the IBH Union Hall.
 | URL | Role |
 | --- | --- |
 | **https://local4663.com** | Landing — jacket + **JOIN LOCAL 4663** |
-| **https://local4663.com/pledge/** | Airdrop / tribute — membership card + **PLEDGE TRIBUTE** |
+| **https://local4663.com/pledge** | Airdrop / tribute — membership card + **PLEDGE TRIBUTE** |
 | https://pledge.local4663.com | Same pledge site (needs Cloudflare CNAME — see below) |
 | https://gibtogether.github.io/ibh/ | GitHub Pages fallback for landing |
 
@@ -19,13 +19,13 @@ In Cloudflare → **local4663.com** → **DNS** → **Add record**:
 | --- | --- | --- | --- |
 | CNAME | `pledge` | `gibtogether.github.io` | DNS only (grey cloud) |
 
-Until that record exists, use **https://local4663.com/pledge/** (already live via this repo).
+Until that record exists, use **https://local4663.com/pledge** (already live via this repo).
 
 ## Pages (this repo)
 
 | File | Role |
 | --- | --- |
-| `index.html` | Landing — jacket; join links to `pledge.local4663.com` |
+| `index.html` | Landing — jacket; join links to `https://local4663.com/pledge` |
 | `home.html` | Union Hall home — poster hero + logo |
 
 ## Assets
