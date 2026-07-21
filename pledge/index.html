@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pledge Tribute — Local 4663</title>
+    <link rel="icon" href="IBHlogo.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .back {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            color: #8b0000;
+            font-size: 14px;
+            text-decoration: none;
+            opacity: 0.85;
+            z-index: 2;
+        }
+
+        .back:hover {
+            opacity: 1;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: min(440px, 100%);
+            width: 100%;
+        }
+
+        .member-card {
+            width: 100%;
+            height: auto;
+            display: block;
+            user-select: none;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Same CTA language as local4663.com landing */
+        button.cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 24px;
+            background: #8b0000;
+            color: #d4af37;
+            padding: 16px 48px;
+            font-size: 20px;
+            font-family: 'Roboto Mono', monospace;
+            letter-spacing: 0.04em;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            min-width: 280px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+        }
+
+        button.cta:hover,
+        button.cta:focus-visible {
+            background: #a00000;
+            outline: none;
+        }
+
+        button.cta .label-copied {
+            display: none;
+        }
+
+        button.cta.is-copied .label-default {
+            display: none;
+        }
+
+        button.cta.is-copied .label-copied {
+            display: inline;
+        }
+
+        .wallet-hint {
+            margin: 12px 0 0;
+            max-width: 360px;
+            width: 100%;
+            color: #5c4a2a;
+            font-size: 12px;
+            line-height: 1.4;
+            text-align: center;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <a class="back" href="https://local4663.com/">← LOCAL 4663</a>
+
+    <div class="panel">
+        <img
+            src="IBHmembercard.png"
+            class="member-card"
+            alt="International Brotherhood of Hoodsters membership card"
+        >
+
+        <button type="button" class="cta" id="pledge-btn" aria-label="Pledge Tribute — copy wallet address">
+            <span class="label-default">PLEDGE TRIBUTE</span>
+            <span class="label-copied">COPIED</span>
+        </button>
+        <p class="wallet-hint" id="wallet-hint" aria-live="polite"></p>
+    </div>
+
+    <script>
+        // Paste the tribute wallet address here before launch.
+        var TRIBUTE_WALLET = '0x017CD7C22ecEDc14520439648D591D2bC903ff23';
+
+        var pledgeBtn = document.getElementById('pledge-btn');
+        var walletHint = document.getElementById('wallet-hint');
+        var copiedTimer = null;
+
+        function shortenWallet(addr) {
+            if (!addr || addr.length < 12) return addr;
+            return addr.slice(0, 6) + '…' + addr.slice(-4);
+        }
+
+        function setWalletHint(text) {
+            walletHint.textContent = text || '';
+        }
+
+        function fallbackCopy(text) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try {
+                ok = document.execCommand('copy');
+            } catch (e) {
+                ok = false;
+            }
+            document.body.removeChild(ta);
+            return ok;
+        }
+
+        function copyTributeWallet() {
+            if (!TRIBUTE_WALLET || TRIBUTE_WALLET.indexOf('REPLACE_WITH_') === 0) {
+                setWalletHint('Set TRIBUTE_WALLET in index.html before launch.');
+                return;
+            }
+
+            function onSuccess() {
+                pledgeBtn.classList.add('is-copied');
+                setWalletHint('Address copied — send tribute to ' + shortenWallet(TRIBUTE_WALLET));
+                if (copiedTimer) window.clearTimeout(copiedTimer);
+                copiedTimer = window.setTimeout(function () {
+                    pledgeBtn.classList.remove('is-copied');
+                }, 2000);
+            }
+
+            function onFail() {
+                setWalletHint(TRIBUTE_WALLET);
+                pledgeBtn.classList.remove('is-copied');
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(TRIBUTE_WALLET).then(onSuccess).catch(function () {
+                    fallbackCopy(TRIBUTE_WALLET) ? onSuccess() : onFail();
+                });
+            } else {
+                fallbackCopy(TRIBUTE_WALLET) ? onSuccess() : onFail();
+            }
+        }
+
+        // Show shortened address under the button on load
+        if (TRIBUTE_WALLET && TRIBUTE_WALLET.indexOf('REPLACE_WITH_') !== 0) {
+            setWalletHint(shortenWallet(TRIBUTE_WALLET));
+        }
+
+        pledgeBtn.addEventListener('click', copyTributeWallet);
+    </script>
+</body>
+</html>
