@@ -57,9 +57,9 @@
             height: auto;
             display: block;
             user-select: none;
-            /* Transparent canvas blends with page white; shadow follows card alpha */
             background: transparent;
-            filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.16));
+            /* White PNG canvas multiplies to invisible on white page — no rectangular outline */
+            mix-blend-mode: multiply;
         }
 
         /* Same CTA language as local4663.com landing */
@@ -118,7 +118,7 @@
 
     <div class="panel">
         <img
-            src="IBHmembercard.png"
+            src="IBHmembercard.png?v=multiply"
             class="member-card"
             alt="International Brotherhood of Hoodsters membership card"
         >
