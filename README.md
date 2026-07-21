@@ -8,11 +8,11 @@ Static site for Local 4663 (GitHub Pages → **local4663.com**).
 | --- | --- |
 | **https://local4663.com** | Landing — jacket + **JOIN LOCAL 4663** (launch mode: hover → Coming Soon) |
 | **https://local4663.com/pledge** | Membership card — **PLEDGE TRIBUTE** (launch mode: no wallet) |
-| https://gibtogether.github.io/ibh/ | GitHub Pages fallback |
+| https://buildtogetherlabs.github.io/ibh/ | GitHub Pages fallback |
 
 **Launch mode (current):** no presale wallet; join/pledge buttons show **COMING SOON** on hover and do not navigate or copy addresses.
 
-The **Union Hall product app** lives in the private repo `gibtogether/union-hall` and is **not** published on this site.
+The **Union Hall product app** lives in the private repo `buildtogetherlabs/union-hall` and is **not** published on this site.
 
 ## Pages (this repo)
 
