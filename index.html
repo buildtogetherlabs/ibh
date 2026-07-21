@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>International Brotherhood of Hoodsters - Local 4663</title>
     <link rel="icon" href="IBHlogo.png" type="image/png">
     <style>
@@ -67,8 +69,22 @@
 <body>
     <img src="IBHjacket.png?v=20260721-phodl" class="jacket" alt="Union Jacket">
 
-    <a class="join" href="https://local4663.com/pledge">
+    <!-- Always use /pledge on this domain — never pledge.local4663.com -->
+    <a class="join" id="join-btn" href="https://local4663.com/pledge">
         JOIN LOCAL 4663
     </a>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('join-btn');
+            if (!btn) return;
+            var target = 'https://local4663.com/pledge';
+            btn.setAttribute('href', target);
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.location.assign(target);
+            });
+        })();
+    </script>
 </body>
 </html>
