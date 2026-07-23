@@ -14,7 +14,7 @@ Static site for Local 4663 (GitHub Pages → **local4663.com**).
 
 **Launch mode (current):** public landing/pledge show **COMING SOON** on hover (no wallet).
 
-**Product preview:** mirror of private `buildtogetherlabs/union-hall` under `/union` for UI testing. Mock data only — not production.
+**Product preview:** public repo `buildtogetherlabs/union-hall-preview` (mock data only). Not hosted on local4663.com.
 
 ## Pages (this repo)
 
