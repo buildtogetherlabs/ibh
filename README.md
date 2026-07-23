@@ -9,13 +9,12 @@ Static site for Local 4663 (GitHub Pages → **local4663.com**).
 | **https://local4663.com** | Landing — jacket + **JOIN LOCAL 4663** (launch mode: hover → Coming Soon) |
 | **https://local4663.com/pledge** | Membership card — **PLEDGE TRIBUTE** (launch mode: no wallet) |
 | **https://local4663.com/books** | Easter egg — sealed notice (unlinked) |
-| **https://buildtogetherlabs.github.io/ibh/union/** | **Product preview** — full Union Books UI (mock data) |
+| **https://buildtogetherlabs.github.io/union-hall/** | **Product preview** — full Union Books UI |
 | https://buildtogetherlabs.github.io/ibh/ | GitHub Pages fallback |
 
 **Launch mode (current):** public landing/pledge show **COMING SOON** on hover (no wallet).
 
-**Product preview:** mirror of private `buildtogetherlabs/union-hall` under `union/`.  
-Use **https://buildtogetherlabs.github.io/ibh/union/** only — on **local4663.com** paths under `/union` redirect home so the marketing domain stays launch-only.
+**Product preview:** mirror of private `buildtogetherlabs/union-hall` under `/union` for UI testing. Mock data only — not production.
 
 ## Pages (this repo)
 
@@ -26,7 +25,6 @@ Use **https://buildtogetherlabs.github.io/ibh/union/** only — on **local4663.c
 | `join.html` | Redirects to landing |
 | `pledge/index.html` | Membership card; launch-mode CTA (no wallet) |
 | `books/index.html` | Easter egg — Form 4663-B hall status; books sealed until launch |
-| `union/` | Product preview (GitHub.io only; blocked on local4663.com) |
 
 ## Assets
 
