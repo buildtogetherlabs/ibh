@@ -8,12 +8,13 @@ Static site for Local 4663 (GitHub Pages → **local4663.com**).
 | --- | --- |
 | **https://local4663.com** | Landing — jacket + **JOIN LOCAL 4663** (launch mode: hover → Coming Soon) |
 | **https://local4663.com/pledge** | Membership card — **PLEDGE TRIBUTE** (launch mode: no wallet) |
-| **https://local4663.com/books** | Easter egg — Union Books sealed / hall coming soon (unlinked) |
+| **https://local4663.com/union/** | **Product preview** — full Union Books UI (mock data; sync from private `union-hall`) |
+| **https://local4663.com/books** | Easter egg — sealed notice (unlinked) |
 | https://buildtogetherlabs.github.io/ibh/ | GitHub Pages fallback |
 
-**Launch mode (current):** no presale wallet; join/pledge buttons show **COMING SOON** on hover and do not navigate or copy addresses.
+**Launch mode (current):** public landing/pledge show **COMING SOON** on hover (no wallet).
 
-The full **Union Books / Hall product app** lives in the private repo `buildtogetherlabs/union-hall` and is **not** published on this site. Public `/books` is only a coming-soon notice (easter egg — not linked from the landing).
+**Product preview:** mirror of private `buildtogetherlabs/union-hall` under `/union` for UI testing. Mock data only — not production.
 
 ## Pages (this repo)
 
@@ -24,6 +25,7 @@ The full **Union Books / Hall product app** lives in the private repo `buildtoge
 | `join.html` | Redirects to landing |
 | `pledge/index.html` | Membership card; launch-mode CTA (no wallet) |
 | `books/index.html` | Easter egg — Form 4663-B hall status; books sealed until launch |
+| `union/` | Full Union Books product preview (static mirror) |
 
 ## Assets
 
