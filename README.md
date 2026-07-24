@@ -1,20 +1,21 @@
 # International Brotherhood of Hoodsters — Local 4663
 
-Static site for Local 4663 (GitHub Pages → **local4663.com**).
+Static **marketing** site for Local 4663 (GitHub Pages → **local4663.com**).
+
+This repo is launch landing only — not the full Union Books product.
 
 ## Live sites
 
-| URL | Role |
-| --- | --- |
-| **https://local4663.com** | Landing — jacket + **JOIN LOCAL 4663** (launch mode: hover → Coming Soon) |
-| **https://local4663.com/pledge** | Membership card — **PLEDGE TRIBUTE** (launch mode: no wallet) |
-| **https://local4663.com/books** | Easter egg — sealed notice (unlinked) |
-| **https://buildtogetherlabs.github.io/union-hall-preview/** | **Product preview** — full Union Books UI |
-| https://buildtogetherlabs.github.io/ibh/ | GitHub Pages fallback |
+| URL | Repo | Role |
+| --- | --- | --- |
+| **https://local4663.com** | this repo (`ibh`) | Landing — jacket + **JOIN LOCAL 4663** (launch mode: hover → Coming Soon) |
+| **https://local4663.com/pledge** | this repo | Membership card — **PLEDGE TRIBUTE** (no wallet) |
+| **https://local4663.com/books** | this repo | Easter egg — sealed notice (unlinked) |
+| **https://buildtogetherlabs.github.io/union-hall-preview/** | [`union-hall-preview`](https://github.com/buildtogetherlabs/union-hall-preview) | **Demo** — full Union Books UI · mock numbers · view-only |
+| **https://buildtogetherlabs.github.io/union-hall-testnet/** | [`union-hall-testnet`](https://github.com/buildtogetherlabs/union-hall-testnet) | **Testnet** — connect MetaMask · try ETH→$HOOD |
+| https://buildtogetherlabs.github.io/ibh/ | this repo | GitHub Pages fallback for marketing |
 
-**Launch mode (current):** public landing/pledge show **COMING SOON** on hover (no wallet).
-
-**Product preview:** public repo `buildtogetherlabs/union-hall-preview` (mock data only). Not hosted on local4663.com.
+**Launch mode (local4663.com):** public landing/pledge show **COMING SOON** on hover (no wallet). Product app is not hosted on this domain yet.
 
 ## Pages (this repo)
 
@@ -37,14 +38,12 @@ Static site for Local 4663 (GitHub Pages → **local4663.com**).
 | `IBHlogoGreen.png` | Green-square logo — **profile images only** |
 | `IBHjacketrear.png` | Jacket rear (reserved) |
 | `IBHmembercard.png` | Membership card (pledge page) |
-| `pledge/HoodstersLogoWhite.png` | Pledge favicon |
-| `pledge/IBHmembercard.png` | Pledge page card |
 
 ## Workflow
 
 1. Branch → commit → open a PR (or push `main` for deploys)
 2. Review and merge to `main`
-3. GitHub Pages deploys from `main` automatically
+3. GitHub Pages deploys from `main` automatically → local4663.com
 
 ## Local preview
 
