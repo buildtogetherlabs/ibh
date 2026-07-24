@@ -101,6 +101,7 @@
         }
 
         .wallet-hint {
+            display: none;
             margin: 12px 0 0;
             max-width: 360px;
             width: 100%;
@@ -111,28 +112,8 @@
             word-break: break-all;
         }
 
-        .rules {
-            margin: 20px 0 0;
-            max-width: 360px;
-            width: 100%;
-            color: #3d3428;
-            font-size: 11px;
-            line-height: 1.55;
-            text-align: left;
-        }
-
-        .rules strong {
-            color: #8b0000;
-            font-weight: 700;
-        }
-
-        .rules li {
-            margin: 0 0 8px;
-        }
-
-        .rules ul {
-            margin: 0;
-            padding-left: 1.15em;
+        .wallet-hint.is-visible {
+            display: block;
         }
     </style>
 </head>
@@ -151,33 +132,19 @@
             <span class="label-copied">COPIED</span>
         </button>
         <p class="wallet-hint" id="wallet-hint" aria-live="polite"></p>
-
-        <div class="rules">
-            <ul>
-                <li><strong>Network:</strong> Robinhood Chain only (chain id <strong>4663</strong>). Wrong chain = not credited.</li>
-                <li><strong>Send ETH</strong> to the address above (copy via Send Pledge). Same address deploys Local 4663.</li>
-                <li><strong>Allocation at close:</strong> each wallet is credited up to a max <em>C<sub>max</sub></em> ETH; then pro-rata share of the presale HOOD pool. <em>C<sub>max</sub></em> and pool size are set after total raised (<em>T</em>) is known — so LP seed and concentration can be sized properly.</li>
-                <li>Amounts over <em>C<sub>max</sub></em> may be refunded or not credited. No guaranteed allocation size. Not financial advice.</li>
-            </ul>
-        </div>
     </div>
 
     <script>
-        // Official presale wallet (Ledger Nano S via Rabby) — Robinhood Chain mainnet 4663
+        // Official presale wallet (Ledger) — Robinhood Chain mainnet 4663
         var TRIBUTE_WALLET = '0x630014aA64DC97C53B1107AB8e8244260E8D02E3';
-        var NETWORK_LABEL = 'Robinhood Chain (4663)';
 
         var pledgeBtn = document.getElementById('pledge-btn');
         var walletHint = document.getElementById('wallet-hint');
         var copiedTimer = null;
 
-        function shortenWallet(addr) {
-            if (!addr || addr.length < 12) return addr;
-            return addr.slice(0, 6) + '…' + addr.slice(-4);
-        }
-
-        function setWalletHint(text) {
+        function showHint(text) {
             walletHint.textContent = text || '';
+            walletHint.classList.add('is-visible');
         }
 
         function fallbackCopy(text) {
@@ -199,24 +166,20 @@
         }
 
         function copyTributeWallet() {
-            if (!TRIBUTE_WALLET || TRIBUTE_WALLET.indexOf('REPLACE_WITH_') === 0) {
-                setWalletHint('Set TRIBUTE_WALLET in index.html before launch.');
-                return;
-            }
+            if (!TRIBUTE_WALLET) return;
 
             function onSuccess() {
                 pledgeBtn.classList.add('is-copied');
-                setWalletHint(
-                    'Address copied — send ETH on ' + NETWORK_LABEL + ' to ' + shortenWallet(TRIBUTE_WALLET)
-                );
+                showHint(TRIBUTE_WALLET);
                 if (copiedTimer) window.clearTimeout(copiedTimer);
                 copiedTimer = window.setTimeout(function () {
                     pledgeBtn.classList.remove('is-copied');
-                }, 2500);
+                }, 2000);
             }
 
             function onFail() {
-                setWalletHint(TRIBUTE_WALLET + ' · ' + NETWORK_LABEL);
+                // Still reveal the address so the user can copy manually
+                showHint(TRIBUTE_WALLET);
                 pledgeBtn.classList.remove('is-copied');
             }
 
@@ -227,11 +190,6 @@
             } else {
                 fallbackCopy(TRIBUTE_WALLET) ? onSuccess() : onFail();
             }
-        }
-
-        // Short address + network under the button on load
-        if (TRIBUTE_WALLET && TRIBUTE_WALLET.indexOf('REPLACE_WITH_') !== 0) {
-            setWalletHint(shortenWallet(TRIBUTE_WALLET) + ' · ' + NETWORK_LABEL);
         }
 
         pledgeBtn.addEventListener('click', copyTributeWallet);
