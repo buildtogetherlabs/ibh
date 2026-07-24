@@ -8,23 +8,30 @@ This repo is launch landing only — not the full Union Books product.
 
 | URL | Repo | Role |
 | --- | --- | --- |
-| **https://local4663.com** | this repo (`ibh`) | Landing — jacket + **JOIN LOCAL 4663** (launch mode: hover → Coming Soon) |
-| **https://local4663.com/pledge** | this repo | Membership card — **PLEDGE TRIBUTE** (no wallet) |
+| **https://local4663.com** | this repo (`ibh`) | Landing — jacket + **JOIN LOCAL 4663** → `/pledge` |
+| **https://local4663.com/pledge** | this repo | Membership card — **SEND PLEDGE** copies tribute wallet |
 | **https://local4663.com/books** | this repo | Easter egg — sealed notice (unlinked) |
 | **https://buildtogetherlabs.github.io/union-hall-preview/** | [`union-hall-preview`](https://github.com/buildtogetherlabs/union-hall-preview) | **Demo** — full Union Books UI · mock numbers · view-only |
 | **https://buildtogetherlabs.github.io/union-hall-testnet/** | [`union-hall-testnet`](https://github.com/buildtogetherlabs/union-hall-testnet) | **Testnet** — connect MetaMask · try ETH→$HOOD |
 | https://buildtogetherlabs.github.io/ibh/ | this repo | GitHub Pages fallback for marketing |
 
-**Launch mode (local4663.com):** public landing/pledge show **COMING SOON** on hover (no wallet). Product app is not hosted on this domain yet.
+**Presale flow (local4663.com):** **JOIN LOCAL 4663** → `/pledge` → **SEND PLEDGE** copies the Ledger address.
+
+| Item | Value |
+| --- | --- |
+| Network | **Robinhood Chain** mainnet (chain id **4663**) only |
+| Receive / deploy address | `0x630014aA64DC97C53B1107AB8e8244260E8D02E3` (Ledger) |
+| Allocation at close | Credit each wallet up to **C_max** ETH → **pro-rata** of presale HOOD pool. **C_max** and pool size set after total raised **T** is known (LP seed + concentration). |
+| Product app | Not on this domain yet (see preview / testnet repos) |
 
 ## Pages (this repo)
 
 | File / path | Role |
 | --- | --- |
-| `index.html` | Landing — jacket; launch-mode join button |
+| `index.html` | Landing — jacket; join → `/pledge` |
 | `home.html` | Poster hero + logo (legacy home) |
-| `join.html` | Redirects to landing |
-| `pledge/index.html` | Membership card; launch-mode CTA (no wallet) |
+| `join.html` | Redirects to `/pledge` |
+| `pledge/index.html` | Membership card; **SEND PLEDGE** copies wallet |
 | `books/index.html` | Easter egg — Form 4663-B hall status; books sealed until launch |
 
 ## Assets

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pledge Tribute — Local 4663</title>
+    <title>Send Pledge — Local 4663</title>
     <link rel="icon" href="HoodstersLogoWhite.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
@@ -62,7 +62,6 @@
             mix-blend-mode: multiply;
         }
 
-        /* Launch mode: hover swaps label to Coming Soon; no wallet */
         button.cta {
             display: inline-flex;
             align-items: center;
@@ -89,23 +88,56 @@
             outline: none;
         }
 
-        button.cta .label-soon {
+        button.cta .label-copied {
             display: none;
         }
 
-        button.cta:hover .label-default,
-        button.cta:focus-visible .label-default {
+        button.cta.is-copied .label-default {
             display: none;
         }
 
-        button.cta:hover .label-soon,
-        button.cta:focus-visible .label-soon {
+        button.cta.is-copied .label-copied {
             display: inline;
+        }
+
+        .wallet-hint {
+            margin: 12px 0 0;
+            max-width: 360px;
+            width: 100%;
+            color: #5c4a2a;
+            font-size: 12px;
+            line-height: 1.4;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .rules {
+            margin: 20px 0 0;
+            max-width: 360px;
+            width: 100%;
+            color: #3d3428;
+            font-size: 11px;
+            line-height: 1.55;
+            text-align: left;
+        }
+
+        .rules strong {
+            color: #8b0000;
+            font-weight: 700;
+        }
+
+        .rules li {
+            margin: 0 0 8px;
+        }
+
+        .rules ul {
+            margin: 0;
+            padding-left: 1.15em;
         }
     </style>
 </head>
 <body>
-    <a class="back" href="https://local4663.com/">← LOCAL 4663</a>
+    <a class="back" href="/">← LOCAL 4663</a>
 
     <div class="panel">
         <img
@@ -114,17 +146,95 @@
             alt="International Brotherhood of Hoodsters membership card"
         >
 
-        <button type="button" class="cta" id="pledge-btn" aria-label="Pledge Tribute — Coming Soon">
-            <span class="label-default">PLEDGE TRIBUTE</span>
-            <span class="label-soon">COMING SOON</span>
+        <button type="button" class="cta" id="pledge-btn" aria-label="Send Pledge — copy wallet address">
+            <span class="label-default">SEND PLEDGE</span>
+            <span class="label-copied">COPIED</span>
         </button>
+        <p class="wallet-hint" id="wallet-hint" aria-live="polite"></p>
+
+        <div class="rules">
+            <ul>
+                <li><strong>Network:</strong> Robinhood Chain only (chain id <strong>4663</strong>). Wrong chain = not credited.</li>
+                <li><strong>Send ETH</strong> to the address above (copy via Send Pledge). Same address deploys Local 4663.</li>
+                <li><strong>Allocation at close:</strong> each wallet is credited up to a max <em>C<sub>max</sub></em> ETH; then pro-rata share of the presale HOOD pool. <em>C<sub>max</sub></em> and pool size are set after total raised (<em>T</em>) is known — so LP seed and concentration can be sized properly.</li>
+                <li>Amounts over <em>C<sub>max</sub></em> may be refunded or not credited. No guaranteed allocation size. Not financial advice.</li>
+            </ul>
+        </div>
     </div>
 
     <script>
-        // Launch mode: no presale wallet — button is visual only
-        document.getElementById('pledge-btn').addEventListener('click', function (e) {
-            e.preventDefault();
-        });
+        // Official presale wallet (Ledger Nano S via Rabby) — Robinhood Chain mainnet 4663
+        var TRIBUTE_WALLET = '0x630014aA64DC97C53B1107AB8e8244260E8D02E3';
+        var NETWORK_LABEL = 'Robinhood Chain (4663)';
+
+        var pledgeBtn = document.getElementById('pledge-btn');
+        var walletHint = document.getElementById('wallet-hint');
+        var copiedTimer = null;
+
+        function shortenWallet(addr) {
+            if (!addr || addr.length < 12) return addr;
+            return addr.slice(0, 6) + '…' + addr.slice(-4);
+        }
+
+        function setWalletHint(text) {
+            walletHint.textContent = text || '';
+        }
+
+        function fallbackCopy(text) {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try {
+                ok = document.execCommand('copy');
+            } catch (e) {
+                ok = false;
+            }
+            document.body.removeChild(ta);
+            return ok;
+        }
+
+        function copyTributeWallet() {
+            if (!TRIBUTE_WALLET || TRIBUTE_WALLET.indexOf('REPLACE_WITH_') === 0) {
+                setWalletHint('Set TRIBUTE_WALLET in index.html before launch.');
+                return;
+            }
+
+            function onSuccess() {
+                pledgeBtn.classList.add('is-copied');
+                setWalletHint(
+                    'Address copied — send ETH on ' + NETWORK_LABEL + ' to ' + shortenWallet(TRIBUTE_WALLET)
+                );
+                if (copiedTimer) window.clearTimeout(copiedTimer);
+                copiedTimer = window.setTimeout(function () {
+                    pledgeBtn.classList.remove('is-copied');
+                }, 2500);
+            }
+
+            function onFail() {
+                setWalletHint(TRIBUTE_WALLET + ' · ' + NETWORK_LABEL);
+                pledgeBtn.classList.remove('is-copied');
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(TRIBUTE_WALLET).then(onSuccess).catch(function () {
+                    fallbackCopy(TRIBUTE_WALLET) ? onSuccess() : onFail();
+                });
+            } else {
+                fallbackCopy(TRIBUTE_WALLET) ? onSuccess() : onFail();
+            }
+        }
+
+        // Short address + network under the button on load
+        if (TRIBUTE_WALLET && TRIBUTE_WALLET.indexOf('REPLACE_WITH_') !== 0) {
+            setWalletHint(shortenWallet(TRIBUTE_WALLET) + ' · ' + NETWORK_LABEL);
+        }
+
+        pledgeBtn.addEventListener('click', copyTributeWallet);
     </script>
 </body>
 </html>

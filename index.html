@@ -40,8 +40,7 @@
             transform: scale(1.03);
         }
 
-        /* Launch mode: hover swaps label to Coming Soon; click does nothing */
-        button.join {
+        a.join {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -56,26 +55,14 @@
             cursor: pointer;
             transition: background 0.2s ease;
             min-width: 280px;
+            text-decoration: none;
+            text-align: center;
         }
 
-        button.join:hover,
-        button.join:focus-visible {
+        a.join:hover,
+        a.join:focus-visible {
             background: #a00000;
             outline: none;
-        }
-
-        button.join .label-soon {
-            display: none;
-        }
-
-        button.join:hover .label-default,
-        button.join:focus-visible .label-default {
-            display: none;
-        }
-
-        button.join:hover .label-soon,
-        button.join:focus-visible .label-soon {
-            display: inline;
         }
 
         a.x-link {
@@ -103,10 +90,8 @@
 <body>
     <img src="IBHjacket-20260721b.png" class="jacket" alt="Union Jacket">
 
-    <button type="button" class="join" aria-label="Join Local 4663 — Coming Soon">
-        <span class="label-default">JOIN LOCAL 4663</span>
-        <span class="label-soon">COMING SOON</span>
-    </button>
+    <!-- Presale: join goes to pledge page (copy-address flow) -->
+    <a class="join" href="/pledge/">JOIN LOCAL 4663</a>
 
     <a
         class="x-link"
@@ -115,12 +100,5 @@
         rel="noopener noreferrer"
         aria-label="Local 4663 on X"
     >X</a>
-
-    <script>
-        // Launch mode: button is visual only — no navigation, no wallet
-        document.querySelector('.join').addEventListener('click', function (e) {
-            e.preventDefault();
-        });
-    </script>
 </body>
 </html>
