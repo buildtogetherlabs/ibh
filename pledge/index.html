@@ -100,11 +100,19 @@
             display: inline;
         }
 
-        .wallet-hint {
+        .after-copy {
             display: none;
             margin: 12px 0 0;
             max-width: 360px;
             width: 100%;
+        }
+
+        .after-copy.is-visible {
+            display: block;
+        }
+
+        .wallet-hint {
+            margin: 0;
             color: #5c4a2a;
             font-size: 12px;
             line-height: 1.4;
@@ -112,8 +120,30 @@
             word-break: break-all;
         }
 
-        .wallet-hint.is-visible {
-            display: block;
+        .rules {
+            margin: 16px 0 0;
+            color: #3d3428;
+            font-size: 11px;
+            line-height: 1.55;
+            text-align: left;
+        }
+
+        .rules strong {
+            color: #8b0000;
+            font-weight: 700;
+        }
+
+        .rules ul {
+            margin: 0;
+            padding-left: 1.15em;
+        }
+
+        .rules li {
+            margin: 0 0 8px;
+        }
+
+        .rules li:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -131,7 +161,17 @@
             <span class="label-default">SEND PLEDGE</span>
             <span class="label-copied">COPIED</span>
         </button>
-        <p class="wallet-hint" id="wallet-hint" aria-live="polite"></p>
+
+        <div class="after-copy" id="after-copy">
+            <p class="wallet-hint" id="wallet-hint" aria-live="polite"></p>
+            <div class="rules">
+                <ul>
+                    <li><strong>Network:</strong> Robinhood Chain only (chain id <strong>4663</strong>). Wrong chain = not credited.</li>
+                    <li><strong>Send ETH</strong> to the address above (copy via Send Pledge).</li>
+                    <li>Amounts over the per-wallet max may be refunded or not credited.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -139,12 +179,13 @@
         var TRIBUTE_WALLET = '0x630014aA64DC97C53B1107AB8e8244260E8D02E3';
 
         var pledgeBtn = document.getElementById('pledge-btn');
+        var afterCopy = document.getElementById('after-copy');
         var walletHint = document.getElementById('wallet-hint');
         var copiedTimer = null;
 
-        function showHint(text) {
-            walletHint.textContent = text || '';
-            walletHint.classList.add('is-visible');
+        function revealAfterCopy() {
+            walletHint.textContent = TRIBUTE_WALLET;
+            afterCopy.classList.add('is-visible');
         }
 
         function fallbackCopy(text) {
@@ -170,7 +211,7 @@
 
             function onSuccess() {
                 pledgeBtn.classList.add('is-copied');
-                showHint(TRIBUTE_WALLET);
+                revealAfterCopy();
                 if (copiedTimer) window.clearTimeout(copiedTimer);
                 copiedTimer = window.setTimeout(function () {
                     pledgeBtn.classList.remove('is-copied');
@@ -178,8 +219,7 @@
             }
 
             function onFail() {
-                // Still reveal the address so the user can copy manually
-                showHint(TRIBUTE_WALLET);
+                revealAfterCopy();
                 pledgeBtn.classList.remove('is-copied');
             }
 
