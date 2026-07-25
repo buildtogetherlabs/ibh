@@ -158,6 +158,27 @@
         .rules li:last-child {
             margin-bottom: 0;
         }
+
+        a.x-link {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #8b0000;
+            text-decoration: none;
+            line-height: 1;
+            z-index: 2;
+            transition: color 0.2s ease;
+        }
+
+        a.x-link:hover,
+        a.x-link:focus-visible {
+            color: #a00000;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -189,6 +210,14 @@
             </div>
         </div>
     </div>
+
+    <a
+        class="x-link"
+        href="https://x.com/local4663"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Local 4663 on X"
+    >X</a>
 
     <script>
         // Official presale wallet (Ledger) — Robinhood Chain mainnet 4663

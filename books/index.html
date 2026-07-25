@@ -69,6 +69,27 @@
       opacity: 1;
     }
 
+    a.x-link {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+      font-family: var(--font);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--burgundy);
+      text-decoration: none;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+
+    a.x-link:hover,
+    a.x-link:focus-visible {
+      color: var(--burgundy-hover);
+      outline: none;
+    }
+
     .page {
       min-height: 100vh;
       display: flex;
@@ -275,12 +296,6 @@
       text-transform: uppercase;
     }
 
-    .footer-line a {
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      text-transform: none;
-    }
-
     @media (max-width: 480px) {
       .notice {
         padding: 22px 18px 26px;
@@ -355,11 +370,16 @@
       </p>
     </article>
 
-    <p class="footer-line">
-      Local 4663 ·
-      <a href="https://x.com/local4663" target="_blank" rel="noopener noreferrer">X</a>
-    </p>
+    <p class="footer-line">Local 4663</p>
   </div>
+
+  <a
+    class="x-link"
+    href="https://x.com/local4663"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Local 4663 on X"
+  >X</a>
 
   <script>
     // Launch mode: visual only — no navigation into the private product app
