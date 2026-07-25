@@ -40,21 +40,30 @@
             transform: scale(1.03);
         }
 
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+            padding: 0 16px;
+        }
+
         a.join {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-top: 32px;
             background: #8b0000;
             color: #d4af37;
-            padding: 16px 48px;
-            font-size: 20px;
+            padding: 16px 32px;
+            font-size: 18px;
             font-family: 'Roboto Mono', monospace;
             letter-spacing: 0.04em;
             border: none;
             cursor: pointer;
             transition: background 0.2s ease;
-            min-width: 280px;
+            min-width: 240px;
             text-decoration: none;
             text-align: center;
         }
@@ -90,8 +99,11 @@
 <body>
     <img src="IBHjacket-20260721b.png" class="jacket" alt="Union Jacket">
 
-    <!-- Presale: join goes to pledge page (copy-address flow) -->
-    <a class="join" href="/pledge/">JOIN LOCAL 4663</a>
+    <!-- Presale: join → pledge; hall → books status -->
+    <div class="cta-row">
+        <a class="join" href="/pledge/">JOIN LOCAL 4663</a>
+        <a class="join" href="/books/">ENTER UNION HALL</a>
+    </div>
 
     <a
         class="x-link"
